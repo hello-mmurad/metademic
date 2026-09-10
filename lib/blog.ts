@@ -21,6 +21,11 @@ function plain(s: string) {
     s.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1").replace(/<[^>]+>/g, " ")
   ).replace(/\s+/g, " ").trim();
 }
+function optionalPlain(s: string | undefined) {
+  if (!s) return undefined;
+  const value = plain(s);
+  return value || undefined;
+}
 
 function pick(block: string, tags: string[]) {
   for (const t of tags) {
@@ -43,9 +48,9 @@ function parseFeed(xml: string): BlogPost[] {
       title: plain(pick(b, ["title"]) ?? ""),
       link: (linkMatch?.[1] ?? "").trim(),
       date: plain(pick(b, ["pubDate", "published", "updated", "dc:date"]) ?? ""),
-      category: plain(pick(b, ["category"]) ?? undefined),
+      category: optionalPlain(pick(b, ["category"])),
       excerpt: plain(pick(b, ["description", "summary", "content:encoded"]) ?? "").slice(0, 220),
-      author: plain(pick(b, ["dc:creator", "author", "name"]) ?? undefined)
+      author: optionalPlain(pick(b, ["dc:creator", "author", "name"]))
     };
   }).filter(p => p.title && p.link.startsWith("http"));
 }
