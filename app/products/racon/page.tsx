@@ -131,7 +131,7 @@ export default async function RaconPage() {
       <section id="quick-start" className="scroll-mt-32 border-t border-line py-12">
         <h2 className="font-display text-2xl font-semibold text-ink">Quick start</h2>
         <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink2">
-          Choose an installation method. Commands shown here are exactly those maintained in the laboratory's records.
+          Choose an installation method. Commands shown here are exactly those maintained in the laboratory&apos;s records.
         </p>
         <div className="mt-6">
           <RaconInstaller methods={raconInstall} />
@@ -208,7 +208,7 @@ export default async function RaconPage() {
         <h2 className="font-display text-2xl font-semibold text-ink">Benchmarks</h2>
         <div className="mt-6">
           <EmptyState title="Benchmark results will be published with documented evaluation protocols.">
-            <p>Scheduler comparisons are currently running on the laboratory's simulated and physical nodes. Results appear here — with configurations, node profiles, and recorded runs — once validated.</p>
+            <p>Scheduler comparisons are currently running on the laboratory&apos;s simulated and physical nodes. Results appear here — with configurations, node profiles, and recorded runs — once validated.</p>
           </EmptyState>
         </div>
       </section>
@@ -253,7 +253,7 @@ export default async function RaconPage() {
         <h2 className="font-display text-2xl font-semibold text-ink">Community</h2>
         <p className="measure mt-3 max-w-xl text-sm leading-relaxed text-ink2">
           Questions, contributions, and reproducible experiment proposals are welcome. The community space
-          grows with the project — start with the laboratory's contact address or the repository once published.
+          grows with the project — start with the laboratory&apos;s contact address or the repository once published.
         </p>
         <div className="mt-5 flex flex-wrap gap-3">
           {site.social.discord && <a href={site.social.discord} target="_blank" rel="noopener noreferrer" className="btn-primary">Join Discord ↗</a>}
