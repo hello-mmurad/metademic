@@ -27,6 +27,12 @@ function optionalPlain(s: string | undefined) {
   return value || undefined;
 }
 
+function optionalPlain(s: string | undefined) {
+  if (!s) return undefined;
+  const value = plain(s);
+  return value || undefined;
+}
+
 function pick(block: string, tags: string[]) {
   for (const t of tags) {
     const m = block.match(new RegExp(`<${t}[^>]*>([\\s\\S]*?)</${t}>`, "i"));

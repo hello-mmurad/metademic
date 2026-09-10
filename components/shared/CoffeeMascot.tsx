@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import { site } from "@/content/site";
 
 /**
  * Original Metademic lab-companion mascot (SVG + CSS only — no heavy 3D
@@ -8,7 +7,13 @@ import { site } from "@/content/site";
  * GLB via React Three Fiber; pause rendering offscreen and keep this static
  * fallback for reduced-motion. Donation URL lives in site.donate.url.
  */
-export default function CoffeeMascot() {
+interface CoffeeMascotProps {
+  donateUrl: string | null;
+  donateNote: string;
+  contactEmail: string;
+}
+
+export default function CoffeeMascot({ donateUrl, donateNote, contactEmail }: CoffeeMascotProps) {
   const [mode, setMode] = useState<"open" | "min" | "hidden">("open");
 
   useEffect(() => {
@@ -24,8 +29,8 @@ export default function CoffeeMascot() {
 
   if (mode === "hidden") return null;
 
-  const href = site.donate.url
-    ?? `mailto:${site.contactEmail}?subject=${encodeURIComponent("Supporting Metademic")}`;
+  const href = donateUrl
+    ?? `mailto:${contactEmail}?subject=${encodeURIComponent("Supporting Metademic")}`;
 
   if (mode === "min") {
     return (
@@ -45,8 +50,8 @@ export default function CoffeeMascot() {
     <div className="fixed bottom-4 right-4 z-50 sm:bottom-6 sm:right-6">
       <div className="relative">
         <a
-          href={href} target={site.donate.url ? "_blank" : undefined}
-          rel={site.donate.url ? "noopener noreferrer" : undefined}
+          href={href} target={donateUrl ? "_blank" : undefined}
+          rel={donateUrl ? "noopener noreferrer" : undefined}
           aria-label="Buy us a coffee — support open research"
           className="mascot group flex w-[116px] flex-col items-center gap-1 rounded-2xl border border-line bg-surface/95 px-3 pb-2.5 pt-3 shadow-card backdrop-blur transition-colors hover:border-teal/50"
         >
@@ -66,7 +71,7 @@ export default function CoffeeMascot() {
             <path d="M100 36 q9 3 0 11" stroke="#1A2421" strokeWidth="2" fill="none" />
           </svg>
           <span className="font-mono text-[10px] font-medium uppercase tracking-[0.12em] text-ink">Buy us a coffee</span>
-          <span className="text-[10px] leading-tight text-ink3">{site.donate.note}</span>
+          <span className="text-[10px] leading-tight text-ink3">{donateNote}</span>
         </a>
         <button
           onClick={hide}

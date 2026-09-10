@@ -42,7 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteHeader />
         <main id="content" className="flex-1">{children}</main>
         <SiteFooter />
-        <CoffeeMascot />
+        <CoffeeMascot donateUrl={site.donate.url} donateNote={site.donate.note} contactEmail={site.contactEmail} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
       </body>
     </html>
