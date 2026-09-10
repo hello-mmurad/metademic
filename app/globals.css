@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+
+html { scroll-behavior: smooth; }
+
+body { background: #FFFDEC; color: #1A2421; -webkit-font-smoothing: antialiased; }
+
+::selection { background: rgba(15, 118, 110, 0.18); }
+
+:focus-visible { outline: 2px solid #0F766E; outline-offset: 2px; border-radius: 2px; }
+
+.measure { max-width: 68ch; }
+
+/* Small monospace metadata label */
+.rule-label {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px; text-transform: uppercase;
+  letter-spacing: 0.22em; color: #0F766E;
+}
+
+/* Buttons — centralized so styling never drifts */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  border-radius: 0.5rem; background: #0F766E; color: #fff;
+  padding: 0.65rem 1.1rem; font-size: 0.9rem; font-weight: 500;
+  transition: background-color 150ms ease;
+}
+.btn-primary:hover { background: #0B5F59; }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  border-radius: 0.5rem; border: 1px solid #DED9BD; background: #FFFEF7;
+  color: #1A2421; padding: 0.65rem 1.1rem; font-size: 0.9rem; font-weight: 500;
+  transition: border-color 150ms ease, color 150ms ease;
+}
+.btn-secondary:hover { border-color: rgba(15,118,110,0.5); color: #0B5F59; }
+.btn-on-dark {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  border-radius: 0.5rem; border: 1px solid rgba(255,253,236,0.25);
+  color: #FFFDEC; padding: 0.65rem 1.1rem; font-size: 0.9rem; font-weight: 500;
+  transition: border-color 150ms ease;
+}
+.btn-on-dark:hover { border-color: #8FD6CD; }
+
+/* Subtle technical texture */
+.bg-dots {
+  background-image: radial-gradient(rgba(222,217,189,0.9) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+
+/* Carousel */
+.carousel-track { scrollbar-width: none; }
+.carousel-track::-webkit-scrollbar { display: none; }
+
+/* Journal banner — slow restrained line grid */
+@keyframes banner-drift { from { background-position: 0 0; } to { background-position: 480px 0; } }
+.journal-grid {
+  background-image:
+    repeating-linear-gradient(90deg, rgba(15,118,110,0.09) 0 1px, transparent 1px 96px),
+    repeating-linear-gradient(0deg, rgba(15,118,110,0.06) 0 1px, transparent 1px 96px);
+  animation: banner-drift 90s linear infinite;
+}
+
+/* Roadmap */
+@keyframes node-breathe {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(15,118,110,0.30); }
+  50%      { box-shadow: 0 0 0 9px rgba(15,118,110,0); }
+}
+.roadmap-node--current { animation: node-breathe 2.6s ease-out infinite; }
+
+@keyframes roadmap-grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+/* Scroll-driven progress line — progressive enhancement only */
+@supports (animation-timeline: view()) {
+  .roadmap-progress {
+    animation: roadmap-grow linear both;
+    animation-timeline: view(block);
+    animation-range: entry 10% exit 80%;
+  }
+}
+
+details > summary .chev { transition: transform 200ms ease; }
+details[open] > summary .chev { transform: rotate(90deg); }
+
+/* Coffee mascot */
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes steam {
+  0% { opacity: 0; transform: translateY(2px); }
+  35% { opacity: 0.75; }
+  100% { opacity: 0; transform: translateY(-7px); }
+}
+.mascot-bob { animation: bob 3.4s ease-in-out infinite; }
+.mascot-steam path { animation: steam 2.2s ease-out infinite; }
+.mascot-steam path:nth-child(2) { animation-delay: 0.7s; }
+.mascot-steam path:nth-child(3) { animation-delay: 1.3s; }
+.mascot .mascot-eye { transition: transform 250ms ease; }
+.mascot:hover .mascot-eye { transform: translateY(-1.5px); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
